@@ -11,18 +11,6 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 public class SpringGatewayApplication {
 
-    @Bean
-    public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route(p -> p
-                        .path("/api/v1/auth/**")
-                        .uri("lb://USERSERVICEAPP"))
-                .route(p -> p
-                        .path("/emailservice/**")
-                        .uri("http://EMAILSERVICE")).
-                build();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(SpringGatewayApplication.class, args);
     }
