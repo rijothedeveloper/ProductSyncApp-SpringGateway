@@ -16,10 +16,10 @@ public class SpringGatewayApplication {
         return builder.routes()
                 .route(p -> p
                         .path("/api/v1/auth/**")
-                        .uri("http://localhost:8081"))
+                        .uri("lb://USERSERVICEAPP"))
                 .route(p -> p
                         .path("/emailservice/**")
-                        .uri("http://localhost:8082")).
+                        .uri("http://EMAILSERVICE")).
                 build();
     }
 
