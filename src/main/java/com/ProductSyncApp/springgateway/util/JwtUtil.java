@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Date;
 import java.util.function.Function;
 
 @Component
@@ -17,16 +18,14 @@ public class JwtUtil {
 
     public boolean isInvalid(final String token) {
         try{
-            Jwts.parserBuilder()
-                    .setSigningKey(getSigninKey())
-                    .build()
-                    .parseClaimsJws(token);
+            return this.getAllClaimsFromToken(token)
+                    .getExpiration().before(new Date());
         } catch (UnsupportedJwtException exception){
             return true;
         } catch (Exception e) {
             return true;
         }
-        return false;
+
     }
 
     public Claims getAllClaimsFromToken(String token) {
